@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgb(0, 0, 0);
+        }
+
+        .con {
+            background-image: url(cover.jfif);
+            background-size: cover;
+            width: 70%;
+            min-height: 80%;
+            border: 4px inset white;
+        }
+
+        .display {
+            width: 95%;
+            text-align: center;
+            margin: 10px;
+            min-height: 100px;
+            background-color: rgb(233, 195, 243);
+            font-size: 250%;
+            filter: opacity(.9);
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .buts {
+            margin: 20px;
+        }
+
+        button {
+            width: 60px;
+            height: 60px;
+            background-color: rgb(255, 115, 0);
+            font-size: xx-large;
+            margin: 10px;
+            border-radius: 14px;
+        }
+
+        .fc {
+            font-size: 90%;
+            font-weight: 600;
+        }
+
+        .text {
+            color: white;
+            border: 2px solid;
+            height: 150px;
+            padding: 15px;
+        }
+
+        .text div ul li {
+            list-style-position: inside;
+        }
+
+        body {
+            display: flex;
+            margin: 7%;
+            gap: 12px;
+        }
+
+        @media screen and (max-width:500px) {
+            body {
+                flex-direction: column;
+                margin: 0;
+            }
+
+            .con {
+                width: 98%;
+            }
+
+            button {
+                width: 57px;
+
+            }
+
+            .buts {
+                margin: 0px;
+            }
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="con">
+        <div class="display">
+
+        </div>
+        <div class="buts">
+            <button id="ac">AC</button>
+            <button id="back"><img src="back.svg" alt=""></button>
+            <button class="fc" id="fc">Full Calcula tion</button>
+            <button id="1">1</button>
+            <button id="2">2</button>
+            <button id="3">3</button>
+            <button id="4">4</button>
+            <button id="5">5</button>
+            <button id="5">6</button>
+            <button id="7">7</button>
+            <button id="8">8</button>
+            <button id="9">9</button>
+            <button id="0">0</button>
+            <button id="+">+</button>
+            <button id="-">-</button>
+            <button id="*">*</button>
+            <button id="/">/</button>
+            <button>**</button>
+            <button id="eql">=</button>
+        </div>
+    </div>
+    <div class="text">
+        <div class="head">
+            ~ ~ Note ~ ~ <br>To get result
+        </div>
+        <div>
+            <ul>
+                <li>Double press enter, = in keyboard</li>
+                <li>Double click = in screen to get result</li>
+                <li>Press 'f' to see complete calculation history</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        let fnum, snum, ope, eql, num, result, newnum
+        let p = document.getElementsByTagName('button')
+        //console.log(p)
+        for (let index = 2; index < p.length - 1; index++) {
+            p[index].addEventListener('click', (e) => {
+                document.querySelector('.display').innerHTML = document.querySelector('.display').innerHTML + p[index].innerHTML
+            })
+        }
+
+        p[p.length - 1].addEventListener('click', () => {
+            num = document.querySelector('.display').innerHTML;
+            if (num.includes('=') == false) {
+                console.log(num, typeof num)
+                result = eval(num)
+                document.querySelector('.display').innerHTML = result
+
+            }
+            else {
+                newnum = num.split('=')
+                console.log(newnum, typeof newnum)
+                result = eval(newnum)
+                document.querySelector('.display').innerHTML = result
+            }
+        })
+        ac.addEventListener('click', () => {
+            document.querySelector('.display').innerHTML = ''
+        })
+        back.addEventListener('click', () => {
+            document.querySelector('.display').innerHTML = document.querySelector('.display').innerHTML.slice(0, document.querySelector('.display').innerHTML.length - 1)
+        })
+        fc.addEventListener('click', () => {
+            document.querySelector('.display').innerHTML = `${num} = ${result.toString()}`;
+            console.log(document.querySelector('.display').innerHTML)
+        })
+
+        document.body.addEventListener('keypress', (e) => {
+            //console.log(e)
+            if (e.key != '=' && e.key != 'Enter' && e.key != 'f') {
+                //console.log(e, e.key)
+                document.querySelector('.display').innerHTML = document.querySelector('.display').innerHTML + e.key
+            }
+            else if (e.key == '=') {
+                num = document.querySelector('.display').innerHTML;
+                if (num.includes('=') == false) {
+                    console.log(num, typeof num)
+                    result = eval(num)
+                    document.querySelector('.display').innerHTML = result
+
+                }
+                else {
+                    newnum = num.split('=')
+                    console.log(newnum, typeof newnum)
+                    result = eval(newnum)
+                    document.querySelector('.display').innerHTML = result
+                }
+            }
+            else if (e.key == 'Enter') {
+                num = document.querySelector('.display').innerHTML;
+                if (num.includes('=') == false) {
+                    console.log(num, typeof num)
+                    result = eval(num)
+                    document.querySelector('.display').innerHTML = result
+
+                }
+                else {
+                    newnum = num.split('=')
+                    console.log(newnum, typeof newnum)
+                    result = eval(newnum)
+                    document.querySelector('.display').innerHTML = result
+                }
+            }
+
+        })
+        document.body.addEventListener('keydown', (e) => {
+            //console.log(e)
+            if (e.code == 'Backspace' && e.key != 'Enter' && e.key != 'f') {
+                document.querySelector('.display').innerHTML = document.querySelector('.display').innerHTML.slice(0, document.querySelector('.display').innerHTML.length - 1)
+            }
+            else if (e.key == 'Delete' && e.key != 'Enter' && e.key != 'f') {
+                document.querySelector('.display').innerHTML = ''
+            }
+            else if (e.key == 'f') {
+                let out = `${num} = ${result.toString()}`
+                console.log(out)
+                document.querySelector('.display').innerHTML = ''
+                document.querySelector('.display').innerHTML = out
+            }
+
+        })
+
+
+    </script>
+</body>
+
+</html>
